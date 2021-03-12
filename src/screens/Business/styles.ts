@@ -1,14 +1,14 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../shared/colors";
 
 export const styles = StyleSheet.create({
   academyCycleContainer: {
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 30,
   },
   container: {
     flex: 1,
-    backgroundColor: "#f7d9d9",
+    backgroundColor: colors.primary,
     alignItems: "center",
     justifyContent: "space-around",
     paddingVertical: 10,

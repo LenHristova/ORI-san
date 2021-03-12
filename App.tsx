@@ -1,9 +1,16 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Business } from "./src/containers/Business/Business";
-import { Home } from "./src/containers/Home/Home";
+import { fonts } from "./assets/fonts";
+import { ActivityIndicator } from "react-native";
+import { useFonts } from "expo-font";
+import { colors } from "./src/shared/colors";
+import { AppNavigator } from "./src/routes/AppNavigator";
 
 export default function App() {
-  return <Business />;
-  // return <Home onClickBusiness={() => null} />;
+  const [fontsLoaded] = useFonts({ Comfortaa: fonts.comfortaaRegular });
+
+  if (fontsLoaded) {
+    return <AppNavigator />;
+  } else {
+    return <ActivityIndicator size="small" color={colors.default} />;
+  }
 }
