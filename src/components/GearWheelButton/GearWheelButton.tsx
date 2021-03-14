@@ -47,18 +47,18 @@ export const GearWheelButton: FunctionComponent<IGearWheelButtonProps> = (
         style={{ transform: [{ rotate: spin }], opacity: 0.9 }}
       />
       <TouchableOpacity
-        accessibilityLabel={`Стартирай стъпка ${props.step}`}
+        accessibilityLabel={`Стартирай ${props.unit}`}
         style={{
           width: touchableSize,
           height: touchableSize,
           borderRadius: touchableSize,
           ...styles.touchableContainer,
         }}
-        onPress={() => Alert.alert("Test")}
+        onPress={props.onPress}
       >
         <Entypo name="controller-play" size={38} color={colors.primary} />
-        <Text style={{ color: colors.primary }}>Стъпка {props.step}:</Text>
-        <Text style={styles.buttonText}>{props.text}</Text>
+        <Text style={{ color: colors.primary }}>{props.unit}:</Text>
+        <Text style={styles.buttonText}>{props.uniteTitle}</Text>
       </TouchableOpacity>
     </View>
   );

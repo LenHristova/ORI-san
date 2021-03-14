@@ -5,17 +5,24 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Business } from "../screens/Business/Business";
 import { Home } from "../screens/Home/Home";
 import { colors } from "../shared/colors";
-
+import { createStackNavigator } from "@react-navigation/stack";
+import { BusinessUnit } from "../screens/BusinessUnit/BusinessUnit";
+import { View, ImageBackground, Image, Text } from "react-native";
 type RootStackParamList = {
   Home: undefined;
   Business: undefined;
 };
 
-const { Navigator, Screen } = createBottomTabNavigator<RootStackParamList>();
+export type BusinessUnitStackParamList = {
+  HomeNavigator: undefined;
+  BusinessUnit: { title: string };
+};
+
+const Tab = createBottomTabNavigator<RootStackParamList>();
 
 export const AppNavigator: FunctionComponent<{}> = ({}) => {
   const HomeNavigator = () => (
-    <Navigator
+    <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName: any;
@@ -35,18 +42,31 @@ export const AppNavigator: FunctionComponent<{}> = ({}) => {
         inactiveTintColor: "gray",
       }}
     >
-      <Screen name="Home" component={Home} options={{ title: "Начало" }} />
-      <Screen
+      <Tab.Screen name="Home" component={Home} options={{ title: "Начало" }} />
+      <Tab.Screen
         name="Business"
         component={Business}
         options={{ title: "Бизнес" }}
       />
-    </Navigator>
+    </Tab.Navigator>
   );
+
+  const Stack = createStackNavigator<BusinessUnitStackParamList>();
 
   return (
     <NavigationContainer>
-      <HomeNavigator />
+      <Stack.Navigator>
+        <Stack.Screen
+          name="HomeNavigator"
+          component={HomeNavigator}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="BusinessUnit"
+          component={BusinessUnit}
+          options={({ route }) => ({ title: route.params.title })}
+        />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };
